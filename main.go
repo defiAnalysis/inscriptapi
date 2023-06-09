@@ -159,10 +159,10 @@ func GetETHInfo(scrollId, next string, session orm.Ormer) string {
 
 	data := `{"filters":[{"type":"activity_types","params":["sale"]},{"type":"collection","params":{"id":"hOM8pOoLkJ"}},{"type":"status","params":{"status":"all"}}],"sort":"registrationDate_asc","scrollId":"` + scrollId + `","next":"` + next + `"}`
 
-	if dataMap[scrollId] {
+	if dataMap[next] {
 		return ""
 	} else {
-		dataMap[scrollId] = true
+		dataMap[next] = true
 	}
 
 	beego.Info("data:", data)
