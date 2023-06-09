@@ -97,8 +97,14 @@ type TokenCriteria struct {
 //	Next     string    `json:"next"`
 //}
 
+var (
+	dataMap map[string]bool
+)
+
 func main() {
 	beego.Info("===")
+	dataMap = make(map[string]bool)
+
 	session := orm.NewOrm()
 	session.Begin()
 	GetETHInfo("", "", session)
@@ -151,7 +157,13 @@ func main() {
 func GetETHInfo(scrollId, next string, session orm.Ormer) string {
 	url := "https://api.godid.io/api/items/query"
 
-	data := `{"filters":[{"type":"activity_types","params":["sale"]},{"type":"collection","params":{"id":"EJWawYhYyV"}},{"type":"q","params":{"value":" "}},{"type":"status","params":{"status":"all"}}],"sort":"registrationDate_asc","scrollId":"` + scrollId + `","next":"` + next + `"}`
+	data := `{"filters":[{"type":"activity_types","params":["sale"]},{"type":"collection","params":{"id":"hOM8pOoLkJ"}},{"type":"status","params":{"status":"all"}}],"sort":"registrationDate_desc","scrollId":"` + scrollId + `","next":"` + next + `"}`
+
+	if dataMap[scrollId] {
+		return ""
+	} else {
+		dataMap[scrollId] = true
+	}
 
 	beego.Info("data:", data)
 	s, err := HttpPostRaw(url, data)
