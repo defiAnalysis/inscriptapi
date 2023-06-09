@@ -151,8 +151,8 @@ func main() {
 func GetETHInfo(scrollId, next string, session orm.Ormer) string {
 	url := "https://api.godid.io/api/items/query"
 
-	data := `{"filters":[{"type":"activity_types","params":["sale"]},{"type":"q","params":{"value":" "}},{"type":"status","params":{"status":"all"}}],"sort":"registrationDate_asc","scrollId":"` + scrollId + `","next":"` + next + `"}`
-		    
+	data := `{"filters":[{"type":"activity_types","params":["sale"]},{"type":"collection","params":{"id":"EJWawYhYyV"}},{"type":"q","params":{"value":" "}},{"type":"status","params":{"status":"all"}}],"sort":"registrationDate_asc","scrollId":"` + scrollId + `","next":"` + next + `"}`
+
 	beego.Info("data:", data)
 	s, err := HttpPostRaw(url, data)
 	if err != nil {
