@@ -157,7 +157,7 @@ func main() {
 func GetETHInfo(scrollId, next string, session orm.Ormer) string {
 	url := "https://api.godid.io/api/items/query"
 
-	data := `{"filters":[{"type":"activity_types","params":["sale"]},{"type":"collection","params":{"id":"hOM8pOoLkJ"}},{"type":"status","params":{"status":"all"}}],"sort":"registrationDate_asc","scrollId":"` + scrollId + `","next":"` + next + `"}`
+	data := `{"filters":[{"type":"activity_types","params":["sale"]},{"type":"collection","params":{"id":"etHpTUqIAk"}},{"type":"q","params":{"value":" "}},{"type":"status","params":{"status":"all"}}],"sort":"registrationDate_asc","scrollId":"` + scrollId + `","next":"` + next + `"}`
 
 	if dataMap[next] {
 		return ""
