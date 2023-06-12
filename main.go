@@ -101,7 +101,7 @@ var (
 	dataMap map[string]bool
 )
 
-func main() {
+func main1() {
 	beego.Info("===")
 	dataMap = make(map[string]bool)
 
@@ -215,4 +215,31 @@ func HttpPostRaw(url, json_str string) (string, error) {
 		return string(body), err
 	}
 	return "", err
+}
+
+func main() {
+	url := "http://54.250.244.153/inscriptions/0"
+	body, err := HttpGet(url)
+	if err != nil {
+		beego.Error("err:", err)
+
+		return
+	}
+
+	beego.Info("body:", string(body))
+
+	return
+}
+
+func HttpGet(url string) ([]byte, error) {
+	req, _ := http.NewRequest("GET", url, nil)
+	req.Header.Add("Content-Type", "application/json")
+	req.Header.Add("cache-control", "no-cache")
+	res, e := http.DefaultClient.Do(req)
+	if res != nil {
+		defer res.Body.Close()
+		body, e := ioutil.ReadAll(res.Body)
+		return body, e
+	}
+	return nil, e
 }
